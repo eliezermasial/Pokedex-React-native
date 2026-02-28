@@ -1,5 +1,6 @@
 import ThedText from "@/components/ThedText";
 import { shaddows } from "@/constants/shaddows";
+import pokemonArtWork from "@/functions/pokemonArtWork";
 import { Link } from "expo-router";
 import { Image, Pressable, StyleSheet, View } from "react-native";
 
@@ -21,7 +22,7 @@ export default function PokemonItem({ name, id }: props) {
           <View style={styles.center}>
             <Image
               source={{
-                uri: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`,
+                uri: pokemonArtWork({ id }),
               }}
               style={styles.image}
               resizeMode="contain"

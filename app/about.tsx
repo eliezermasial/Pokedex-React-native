@@ -1,17 +1,12 @@
-import { Text, View } from "react-native";
+import RootView from "@/components/RootView";
+import ThedText from "@/components/ThedText";
 
 export default function About() {
-    return (
-        <View
-            style={{
-                flex: 1,
-                justifyContent: "center",
-                alignItems: "center",
-                backgroundColor: "#24a0c5",
-                padding: 20,
-            }}
-        >
-            <Text>This is the about screen. Edit app/about.tsx to change this screen.</Text>
-        </View>
-    );
+  return (
+    <RootView>
+      <ThedText>
+        This is the about screen. Edit app/about.tsx to change this screen.
+      </ThedText>
+    </RootView>
+  );
 }

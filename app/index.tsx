@@ -20,12 +20,26 @@ import {
 
 export default function Index() {
   const colors = useThemeColor();
+
+  // State qui contient le texte de recherche saisi par user
   const [search, setSearch] = useState("");
+
+  // State qui définit la clé de tri des Pokémon (par nom ou par id)
   const [sortKey, setSortKey] = useState<"name" | "id">("id");
 
+  // Chemin de l’API pour récupérer les Pokémon avec une limite
   const path = "/pokemon?limit=21";
+
+  // Hook de récupération des données avec pagination infinie
+  // - data : données récupérées
+  // - isLoading : chargement initial
+  // - isFetching : chargement supplémentaire (scroll)
+  // - fetchNextPage : fonction pour charger la page suivante
   const { data, isLoading, isFetching, fetchNextPage } =
     useInfiniteFetchQuery(path);
+
+  // Transformation des données API en une liste simple de Pokémon
+  // Chaque Pokémon contient un nom et un id extrait depuis l’URL
   const pokemons =
     data?.pages.flatMap((page) =>
       page?.results.map((r) => ({
@@ -33,6 +47,10 @@ export default function Index() {
         id: getPokemonIdFromUrl(r.url),
       })),
     ) ?? [];
+
+  // Liste finale des Pokémon :
+  // 1. Filtrée selon le texte de recherche (nom ou id)
+  // 2. Triée dynamiquement selon la clé sélectionnée (name ou id)
   const filteredPokemons = [
     ...(search.trim().length > 0
       ? pokemons.filter(
